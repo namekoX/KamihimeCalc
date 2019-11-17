@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+	<meta http-equiv="Content-Style-Type" content="text/css">
+	<meta http-equiv="Pragma" content="no-store">
+    <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, max-age=0">
+    <script type="text/javascript" src="kamihime-calc-consts.js"></script>
+    <script type="text/javascript" src="kamihime-calc-main.js"></script>
+    <script type="text/javascript" src="jquery-3.3.1.min.js"></script>
+	<script type="text/javascript" src="js.cookie.js"></script>
+	<script type="text/javascript" src="chosen/chosen.jquery.ja_.js"></script>	
+	<link href="chosen/chosen.css" rel="stylesheet" type="text/css">
+	<script src="chosen/init.js" type="text/javascript" charset="utf-8"></script>
+	<link href="kamihime-calc.css" rel="stylesheet" type="text/css">
+	<title>神姫プロジェクト攻撃計算</title>
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-102269600-3', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</head>
+<body>
+    <select id="dummy" style="display:none;"></select>
+	<div id = "page">
+ 		<div id="header">
+			<div id="sitename">
+				神姫プロジェクト攻撃計算
+			</div>
+		</div>
+    	<div id="contents">
+    	    <div class = "setumei"></div>
+		<div style ="margin: 0px 10px 0px 20px;">
+			<h3>修正履歴</h3>
+				  <textarea id="rireki" cols=50 rows=4 style="width:700px;text-align:left;" readonly = "true">
+2019/08/31 ストラスの幻獣効果が誤っていた不具合を修正
+2019/08/12 デスペレートに対応、テクニカのダメージアップが適用されていなかった不具合を修正
+2019/07/15 ヴィゴラスの値が1レベル分低かった不具合を修正、検索ボタンで武器を設定できない不具合を修正
+2019/07/07 マグネイトにテクニカの効果が含まれていない不具合を修正、選択肢が消える不具合を修正
+2019/07/07 武器と幻獣選択時に文字検索できるようにしました
+2019/06/25 アンプリファの効果量が0になっていた不具合を修正
+2019/06/18 絞りこみの条件を保存できるように修正（URL発行は非対応）
+2019/05/25 サーバー保存ボタン時にテクニカと英気解放の値が0になる不具合を修正
+2019/05/10 残っているバグ→守護天にバフ、プリズム、英霊HPが加算される　ステータスが微妙にずれる武器がある
+2019/05/10 シャルルマーニュの帝王の威光の効果量不明なので保留にしています
+2019/05/10 ランクSの英霊武器を追加
+2019/04/07 HP減少時のヴィゴラスの効果量がバグっていたので修正
+2019/04/07 テクニカ、パークアップ、マグネイトに対応
+2019/02/20 初期画面の幻獣の最大レベルが90になっていた不具合を修正
+2019/02/11 エアロストレングスの効果がディフェンダー/アセンションになっていたバグを修正
+2019/01/16 残っているバグ→守護天にバフ、プリズム、英霊HPが加算される　ステータスが微妙にずれる武器がある
+2019/01/16 風翼刃ドキマシアサイスがストウォート中になっているバグを修正
+2019/01/16 アサルト特大、ディフェンダー特大に対応
+2018/12/27 145%以上の幻獣の計算がバグってたので修正
+2018/12/27 スプラウトに対応　守護天のバグ、ステータスが微妙にずれる件はまだ未解消です…
+2018/12/02 守護天のバグがあります…（バフ、プリズム、英霊HP武器の値とかも加算されてしまう）
+2018/12/02 トランセンドに対応
+2018/12/02 守護天の装備のステータスのバグを修正
+2018/11/22 サーバにデータ保存する機能作成
+2018/11/17 守護天に対応
+2018/11/17 ストウォートに対応
+2018/11/07 HPが多いほど攻撃UPの幻獣に対応(シアエガ、ヘズ)
+2018/11/07 プリズム、グレイス、レジリエンスに対応
+2018/11/07 復帰しました
+2018/08/25 リアルが忙しくなったため引退しました（アプデ終了）
+2018/08/20 ツインガードに対応
+2018/08/04 レインボーアサルトに対応
+2018/07/28 オプションに英気解放を追加　「戦闘時予測」欄の数値計算に適用される
+2018/07/28 ロードをした際に武器レベルが正常にロードできないことがある不具合を修正
+2018/07/28 幻武器でのステータスアップにボーナス（+)分が含まれていない不具合を修正
+2018/07/28 バーストの減衰が正常に計算されていない不具合を修正（減衰無限になってた）
+            		</textarea><br>
+        	不具合・要望などありましたら、お手数ですが下記にコメントいただけると助かります。<br>
+    	<a href="https://bzgameblog.net/blog/%E4%BD%9C%E6%88%90%E7%89%A9%E3%81%BE%E3%81%A8%E3%82%81/" target="blank">管理人のブログ</a>
+    	<br><br>
+		</div>
+				<div id="main">
+				<div class="title">
+					<h1>情報入力</h1>
+				</div>
+				<div class="tabs">
+ 					<input id="kami" type="radio" name="tab_item" checked>
+					<label class="tab_item" for="kami">基本</label>
+					<input id="wep" type="radio" name="tab_item">
+					<label class="tab_item" for="wep">ウェポン</label>
+					<input id="gen" type="radio" name="tab_item">
+					<label class="tab_item" for="gen">幻獣</label>
+  					<div class="tab_content" id="kami_content">
+    					<table>
+    						<tr>
+    							<th>
+    								プレイヤーランク
+    							</th>
+    							<td>
+    							   <input type="number" min="1" max="200" value="1" maxlength="3" id="rank" class = "inputbox" onchange="clcjob()"></input>
+    							</td>
+    						</tr>
+    						<tr>
+    							<th>
+    								英霊
+    							</th>
+    							<td>
+    							   <select id="job" onchange="clcjob()"></select>
+    							</td>
+    						</tr>
+    						<tr>
+    							<th>
+    								残HP(%) ※プライド計算用
+    							</th>
+    							<td>
+    							   <input type="number" min="1" max="100" value="100" maxlength="3" id="zhp" class = "inputbox" onchange="clcjob()"></input>
+    							</td>
+    						</tr>
+    					</table>
+    					<h2>細かい設定(通常時設定不要)</h2>
+    					 <table>
+    						<tr>
+    							<th>
+    								敵防御力(標準10)
+    							</th>
+    							<td>
+    							   <input type="number" min="1" max="100" value="10" maxlength="3" id="edff" class = "inputbox" onchange="clcjob()"></input>
+    							</td>
+    						</tr>
+    						<tr>
+    							<th>
+    								敵防御デバフ
+    							</th>
+    							<td>
+    							   <input type="number" min="0" max="50" value="50" maxlength="3" id="edebuf" class = "inputbox" onchange="clcjob()"></input>
+    							</td>
+    						</tr>
+    						<tr>
+    							<th>
+    							    敵の属性
+    							</th>
+    							<td>
+									<input type="radio" name="jyaku" value="1" onchange="clcjob()"> 有利属性
+									<input type="radio" name="jyaku" value="2" onchange="clcjob()"> 不利属性
+									<input type="radio" name="jyaku" value="3" checked onchange="clcjob()"> 普通
+    							</td>
+    						</tr>
+    						    <tr>
+    							<th>
+    							    ユニオン守護神
+    							</th>
+    							<td>
+									<input type="radio" name="shugo" value="1" onchange="clcjob()"> あり
+									<input type="radio" name="shugo" value="2" checked onchange="clcjob()"> なし
+    							</td>
+    						</tr>
+    						<tr>
+    							<th>
+    							    攻撃バフ<br>(アサルト)
+    							</th>
+    							<td>
+    							   <input type="number" min="1" max="100" value="0" maxlength="3" id="abuff" class = "inputbox" onchange="clcjob()"></input>
+    							</td>
+    						</tr>
+    						<tr>
+    							<th>
+    							    攻撃バフ<br>(属性)
+    							</th>
+    							<td>
+    							   <input type="number" min="1" max="100" value="0" maxlength="3" id="azbuff" class = "inputbox" onchange="clcjob()"></input>
+    							</td>
+    						</tr>
+    						<tr>
+    							<th>
+    							    攻撃十字架<br>（ユニイベ用）
+    							</th>
+    							<td>
+    							   <input type="number" min="1" max="100" value="0" maxlength="3" id="jyujia" class = "inputbox" onchange="clcjob()"></input>
+    							</td>
+    						</tr>
+    						<tr>
+    							<th>
+    							    HP十字架<br>（ユニイベ用）
+    							</th>
+    							<td>
+    							   <input type="number" min="1" max="100" value="0" maxlength="3" id="jyujihp" class = "inputbox" onchange="clcjob()"></input>
+    							</td>
+    						</tr>
+    						<tr>
+    							<th>
+    							    マスターボーナス<br>攻撃(%)
+    							</th>
+    							<td>
+								   <input type="number" min="1" max="100" value="12" maxlength="3" id="masterat" class = "inputbox" onchange="clcjob()"></input><br>
+								   ※Aランク全開放で12%
+    							</td>
+    						</tr>
+    						<tr>
+    							<th>
+									マスターボーナス<br>HP(%)
+    							</th>
+    							<td>
+    							   <input type="number" min="1" max="100" value="12" maxlength="3" id="masterhp" class = "inputbox" onchange="clcjob()"></input><br>
+								   ※Aランク全開放で12%
+								</td>
+    						</tr>
+    						<tr>
+    							<th>
+    							    英気解放(0～3を指定)
+    							</th>
+    							<td>
+								<table class="nobordertable">
+									<tr id = "tr_eiki_atkdai">
+										<td class="nobordertable" style="width:120px">攻撃力アップ大</td>
+										<td  class="nobordertable"><input type="number" min="0" max="3" value="0" maxlength="1" id="eiki_atkdai" class = "inputbox" onchange="clcjob()"></input></td>
+									</tr>
+									<tr id = "tr_eiki_atkchu">
+										<td class="nobordertable" style="width:120px">攻撃力アップ中</td>
+										<td  class="nobordertable"><input type="number" min="0" max="3" value="0" maxlength="1" id="eiki_atkchu" class = "inputbox" onchange="clcjob()"></input></td>
+									</tr>
+									<tr id = "tr_eiki_atksho">
+										<td class="nobordertable" style="width:120px">攻撃力アップ小</td>
+										<td  class="nobordertable"><input type="number" min="0" max="3" value="0" maxlength="1" id="eiki_atksho" class = "inputbox" onchange="clcjob()"></input></td>
+									</tr>
+									<tr id = "tr_eiki_hpup">
+										<td class="nobordertable" style="width:120px">HPUP</td>
+										<td  class="nobordertable"><input type="number" min="0" max="3" value="0" maxlength="1" id="eiki_hpup" class = "inputbox" onchange="clcjob()"></input></td>
+									</tr>
+									<tr id = "tr_eiki_hpup2">
+										<td class="nobordertable" style="width:120px">HPUP</td>
+										<td  class="nobordertable"><input type="number" min="0" max="3" value="0" maxlength="1" id="eiki_hpup2" class = "inputbox" onchange="clcjob()"></input></td>
+									</tr>
+									<tr id = "tr_eiki_burstup">
+										<td class="nobordertable" style="width:120px">バースト性能</td>
+										<td  class="nobordertable"><input type="number" min="0" max="3" value="0" maxlength="1" id="eiki_burstup" class = "inputbox" onchange="clcjob()"></input></td>
+									</tr>
+									<tr id = "tr_eiki_burstup2">
+										<td class="nobordertable" style="width:120px">バースト性能</td>
+										<td  class="nobordertable"><input type="number" min="0" max="3" value="0" maxlength="1" id="eiki_burstup2" class = "inputbox" onchange="clcjob()"></input></td>
+									</tr>
+								</table>
+    							</td>
+    						</tr>
+    					</table>
+  					</div>
+  					<div class="tab_content" id="wep_content">
+  						<fieldset style="border: 1px solid #000000; padding: 10px;"> 
+							<legend>絞り込み</legend>
+						        <div class="chkbox">
+									<input type="checkbox"  checked id="wep1_sibori1" onchange="wep_sibori_change()" />
+									<label for="wep1_sibori1">SSR</label>
+									<input type="checkbox" id="wep1_sibori2" onchange="wep_sibori_change()" />
+									<label for="wep1_sibori2">SR</label>
+									<input type="checkbox" id="wep1_sibori3" onchange="wep_sibori_change()" />
+									<label for="wep1_sibori3">R</label>
+									<input type="checkbox" id="wep1_sibori4" onchange="wep_sibori_change()" />
+									<label for="wep1_sibori4">N</label><br><br>
+									<input type="checkbox" checked id="wep1_sibori5" onchange="wep_sibori_change()" />
+									<label for="wep1_sibori5">火</label>
+									<input type="checkbox" checked id="wep1_sibori6" onchange="wep_sibori_change()" />
+									<label for="wep1_sibori6">水</label>
+									<input type="checkbox" checked id="wep1_sibori7" onchange="wep_sibori_change()" />
+									<label for="wep1_sibori7">風</label>
+									<input type="checkbox" checked id="wep1_sibori8" onchange="wep_sibori_change()" />
+									<label for="wep1_sibori8">雷</label>
+									<input type="checkbox" checked id="wep1_sibori9" onchange="wep_sibori_change()" />
+									<label for="wep1_sibori9">闇</label>
+									<input type="checkbox" checked id="wep1_sibori10" onchange="wep_sibori_change()" />
+									<label for="wep1_sibori10">光</label>
+									<input type="checkbox" checked id="wep1_sibori11" onchange="wep_sibori_change()" />
+									<label for="wep1_sibori11">幻</label><br><br>
+								    <input type="checkbox" id="wep1_sibori12" onchange="wep_sibori_change()" />
+									<label for="wep1_sibori12">メインに英霊武器のみ表示</label>
+								    <input type="checkbox" id="wep1_sibori13" onchange="wep_sibori_change()" />
+									<label for="wep1_sibori13">サブに英霊武器を表示</label>
+								</div>
+						</fieldset> <br>
+  						<fieldset style="border: 1px solid #000000; padding: 10px;"> 
+							<legend>1括設定</legend>
+							<input type="button" id="wep_clear" value="入力をクリア" onclick="wep_clear()" class = "buttons">
+							<input type="button" id="wep_clear" value="レベル最大" onclick="wep_lvmax()" class = "buttons">
+							<input type="button" id="wep_clear" value="ボーナス最大" onclick="wep_plusmax()" class = "buttons">
+							<input type="button" value = "検索" onclick="wepserch()" class = "buttons"></input>
+						</fieldset>
+    					<h2>メインウェポン</h2>
+    					<table>
+    						<tr>
+    							<th width = "200">
+    								名前
+    							</th>
+    							<th>
+    								レベル
+    							</th>
+    							<th>
+    								スキル<br>レベル
+    							</th>
+    							<th>
+    								ボーナス（+）
+    							</th>
+    						</tr>
+    						<tr>
+    							<td>
+    							   <select id="wep1_name" onchange="wep_change(1)" class="chosen-select"></select><br><br>
+    							   <div id ="wep_finaldiv1"><input type="checkbox" id="wep1_final" value="0" onchange="wep_change(1)">最終限界突破</div>
+    							</td>
+    						    <td>
+    							   <input type="number" min="1" max="125" value="1" maxlength="3" id="wep1_lv" class = "inputbox" onchange="wep_info(1)"></input>
+    							</td>
+    						    <td>
+    							   <input type="number" min="1" max="20" value="1" maxlength="3" id="wep1_slv" class = "inputbox" onchange="wep_info(1)"></input>
+    							</td>
+    							<td>
+    							   <input type="number" min="0" max="99" value="0" maxlength="2" id="wep1_plus" class = "inputbox" onchange="wep_info(1)"></input>
+    							</td>
+    						</tr>
+    						<tr>
+    							<td colspan = "4">
+    								<div id="wep1_info"></div>
+    							</td>
+    						</tr>
+    					</table>
+    					<h2>サブウェポン</h2>
+    					<table>
+    						<tr>
+    							<th width = "200">
+    								名前
+    							</th>
+    							<th>
+    								レベル
+    							</th>
+    							<th>
+    								スキル<br>レベル
+    							</th>
+    							<th>
+    								ボーナス（+）
+    							</th>
+    						</tr>
+     						<tr>		
+    							<td>	
+    							   <select id="wep2_name" onchange="wep_change(2)" class="chosen-select"></select><br><br>	
+    							<div id ="wep_finaldiv2" style="display:none"><input type="checkbox" id="wep2_final" value="0" onchange="wep_change(2)">最終限界突破</div>	
+    							</td>	
+    						    <td>		
+    							   <input type="number" min="1" max="125" value="1" maxlength="3" id="wep2_lv" disabled="disabled" class = "inputbox" onchange="wep_info(2)"></input>	
+    							</td>	
+    						    <td>		
+    							   <input type="number" min="1" max="20" value="1" maxlength="3" id="wep2_slv" disabled="disabled" class = "inputbox" onchange="wep_info(2)"></input>	
+    							</td>	
+    							<td>	
+    							   <input type="number" min="0" max="99" value="0" maxlength="2" id="wep2_plus" disabled="disabled" class = "inputbox" onchange="wep_info(2)"></input>	
+    							</td>	
+    						</tr>		
+    						<tr>		
+    							<td colspan = "4">	
+    								<div id="wep2_info"></div>
+    							</td>	
+    						</tr>		
+    						<tr>		
+    							<td>	
+    							   <select id="wep3_name" onchange="wep_change(3)" class="chosen-select"></select><br><br>	
+    							<div id ="wep_finaldiv3" style="display:none"><input type="checkbox" id="wep3_final" value="0" onchange="wep_change(3)">最終限界突破</div>	
+    							</td>	
+    						    <td>		
+    							   <input type="number" min="1" max="125" value="1" maxlength="3" id="wep3_lv" disabled="disabled" class = "inputbox" onchange="wep_info(3)"></input>	
+    							</td>	
+    						    <td>		
+    							   <input type="number" min="1" max="20" value="1" maxlength="3" id="wep3_slv" disabled="disabled" class = "inputbox" onchange="wep_info(3)"></input>	
+    							</td>	
+    							<td>	
+    							   <input type="number" min="0" max="99" value="0" maxlength="2" id="wep3_plus" disabled="disabled" class = "inputbox" onchange="wep_info(3)"></input>	
+    							</td>	
+    						</tr>		
+    						<tr>		
+    							<td colspan = "4">	
+    								<div id="wep3_info"></div>
+    							</td>	
+    						</tr>		
+    						<tr>		
+    							<td>	
+    							   <select id="wep4_name" onchange="wep_change(4)" class="chosen-select"></select><br><br>	
+    							<div id ="wep_finaldiv4" style="display:none"><input type="checkbox" id="wep4_final" value="0" onchange="wep_change(4)">最終限界突破</div>	
+    							</td>	
+    						    <td>		
+    							   <input type="number" min="1" max="125" value="1" maxlength="3" id="wep4_lv" disabled="disabled" class = "inputbox" onchange="wep_info(4)"></input>	
+    							</td>	
+    						    <td>		
+    							   <input type="number" min="1" max="20" value="1" maxlength="3" id="wep4_slv" disabled="disabled" class = "inputbox" onchange="wep_info(4)"></input>	
+    							</td>	
+    							<td>	
+    							   <input type="number" min="0" max="99" value="0" maxlength="2" id="wep4_plus" disabled="disabled" class = "inputbox" onchange="wep_info(4)"></input>	
+    							</td>	
+    						</tr>		
+    						<tr>		
+    							<td colspan = "4">	
+    								<div id="wep4_info"></div>
+    							</td>	
+    						</tr>		
+    						<tr>		
+    							<td>	
+    							   <select id="wep5_name" onchange="wep_change(5)" class="chosen-select"></select><br><br>	
+    							<div id ="wep_finaldiv5" style="display:none"><input type="checkbox" id="wep5_final" value="0" onchange="wep_change(5)">最終限界突破</div>	
+    							</td>	
+    						    <td>		
+    							   <input type="number" min="1" max="125" value="1" maxlength="3" id="wep5_lv" disabled="disabled" class = "inputbox" onchange="wep_info(5)"></input>	
+    							</td>	
+    						    <td>		
+    							   <input type="number" min="1" max="20" value="1" maxlength="3" id="wep5_slv" disabled="disabled" class = "inputbox" onchange="wep_info(5)"></input>	
+    							</td>	
+    							<td>	
+    							   <input type="number" min="0" max="99" value="0" maxlength="2" id="wep5_plus" disabled="disabled" class = "inputbox" onchange="wep_info(5)"></input>	
+    							</td>	
+    						</tr>		
+    						<tr>		
+    							<td colspan = "4">	
+    								<div id="wep5_info"></div>
+    							</td>	
+    						</tr>		
+    						<tr>		
+    							<td>	
+    							   <select id="wep6_name" onchange="wep_change(6)" class="chosen-select"></select><br><br>	
+    							<div id ="wep_finaldiv6" style="display:none"><input type="checkbox" id="wep6_final" value="0" onchange="wep_change(6)">最終限界突破</div>	
+    							</td>	
+    						    <td>		
+    							   <input type="number" min="1" max="125" value="1" maxlength="3" id="wep6_lv" disabled="disabled" class = "inputbox" onchange="wep_info(6)"></input>	
+    							</td>	
+    						    <td>		
+    							   <input type="number" min="1" max="20" value="1" maxlength="3" id="wep6_slv" disabled="disabled" class = "inputbox" onchange="wep_info(6)"></input>	
+    							</td>	
+    							<td>	
+    							   <input type="number" min="0" max="99" value="0" maxlength="2" id="wep6_plus" disabled="disabled" class = "inputbox" onchange="wep_info(6)"></input>	
+    							</td>	
+    						</tr>		
+    						<tr>		
+    							<td colspan = "4">	
+    								<div id="wep6_info"></div>
+    							</td>	
+    						</tr>		
+    						<tr>		
+    							<td>	
+    							   <select id="wep7_name" onchange="wep_change(7)" class="chosen-select"></select><br><br>	
+    							<div id ="wep_finaldiv7" style="display:none"><input type="checkbox" id="wep7_final" value="0" onchange="wep_change(7)">最終限界突破</div>	
+    							</td>	
+    						    <td>		
+    							   <input type="number" min="1" max="125" value="1" maxlength="3" id="wep7_lv" disabled="disabled" class = "inputbox" onchange="wep_info(7)"></input>	
+    							</td>	
+    						    <td>		
+    							   <input type="number" min="1" max="20" value="1" maxlength="3" id="wep7_slv" disabled="disabled" class = "inputbox" onchange="wep_info(7)"></input>	
+    							</td>	
+    							<td>	
+    							   <input type="number" min="0" max="99" value="0" maxlength="2" id="wep7_plus" disabled="disabled" class = "inputbox" onchange="wep_info(7)"></input>	
+    							</td>	
+    						</tr>		
+    						<tr>		
+    							<td colspan = "4">	
+    								<div id="wep7_info"></div>
+    							</td>	
+    						</tr>		
+    						<tr>		
+    							<td>	
+    							   <select id="wep8_name" onchange="wep_change(8)" class="chosen-select"></select><br><br>	
+    							<div id ="wep_finaldiv8" style="display:none"><input type="checkbox" id="wep8_final" value="0" onchange="wep_change(8)">最終限界突破</div>	
+    							</td>	
+    						    <td>		
+    							   <input type="number" min="1" max="125" value="1" maxlength="3" id="wep8_lv" disabled="disabled" class = "inputbox" onchange="wep_info(8)"></input>	
+    							</td>	
+    						    <td>		
+    							   <input type="number" min="1" max="20" value="1" maxlength="3" id="wep8_slv" disabled="disabled" class = "inputbox" onchange="wep_info(8)"></input>	
+    							</td>	
+    							<td>	
+    							   <input type="number" min="0" max="99" value="0" maxlength="2" id="wep8_plus" disabled="disabled" class = "inputbox" onchange="wep_info(8)"></input>	
+    							</td>	
+    						</tr>		
+    						<tr>		
+    							<td colspan = "4">	
+    								<div id="wep8_info"></div>
+    							</td>	
+    						</tr>		
+    						<tr>		
+    							<td>	
+    							   <select id="wep9_name" onchange="wep_change(9)" class="chosen-select"></select><br><br>	
+    							<div id ="wep_finaldiv9" style="display:none"><input type="checkbox" id="wep9_final" value="0" onchange="wep_change(9)">最終限界突破</div>	
+    							</td>	
+    						    <td>		
+    							   <input type="number" min="1" max="125" value="1" maxlength="3" id="wep9_lv" disabled="disabled" class = "inputbox" onchange="wep_info(9)"></input>	
+    							</td>	
+    						    <td>		
+    							   <input type="number" min="1" max="20" value="1" maxlength="3" id="wep9_slv" disabled="disabled" class = "inputbox" onchange="wep_info(9)"></input>	
+    							</td>	
+    							<td>	
+    							   <input type="number" min="0" max="99" value="0" maxlength="2" id="wep9_plus" disabled="disabled" class = "inputbox" onchange="wep_info(9)"></input>	
+    							</td>	
+    						</tr>		
+    						<tr>		
+    							<td colspan = "4">	
+    								<div id="wep9_info"></div>
+    							</td>	
+    						</tr>		
+    						<tr>		
+    							<td>	
+    							   <select id="wep10_name" onchange="wep_change(10)" class="chosen-select"></select><br><br>	
+    							<div id ="wep_finaldiv10" style="display:none"><input type="checkbox" id="wep10_final" value="0" onchange="wep_change(10)">最終限界突破</div>	
+    							</td>	
+    						    <td>		
+    							   <input type="number" min="1" max="125" value="1" maxlength="3" id="wep10_lv" disabled="disabled" class = "inputbox" onchange="wep_info(10)"></input>	
+    							</td>	
+    						    <td>		
+    							   <input type="number" min="1" max="20" value="1" maxlength="3" id="wep10_slv" disabled="disabled" class = "inputbox" onchange="wep_info(10)"></input>	
+    							</td>	
+    							<td>	
+    							   <input type="number" min="0" max="99" value="0" maxlength="2" id="wep10_plus" disabled="disabled" class = "inputbox" onchange="wep_info(10)"></input>	
+    							</td>	
+    						</tr>		
+    						<tr>		
+    							<td colspan = "4">	
+    								<div id="wep10_info"></div>
+    							</td>	
+    						</tr>		
+    					</table>    					
+  					</div>
+  					<div class="tab_content" id="gen_content">
+    						<fieldset style="border: 1px solid #000000; padding: 10px;"> 
+								<legend>絞り込み</legend>
+						    	    <div class="chkbox">
+										<input type="checkbox"  checked id="gen1_sibori1" onchange="gen_sibori_change()" />
+										<label for="gen1_sibori1">SSR</label>
+										<input type="checkbox" id="gen1_sibori2" onchange="gen_sibori_change()" />
+										<label for="gen1_sibori2">SR</label>
+										<input type="checkbox" id="gen1_sibori3" onchange="gen_sibori_change()" />
+										<label for="gen1_sibori3">R</label>
+										<input type="checkbox" id="gen1_sibori4" onchange="gen_sibori_change()" />
+										<label for="gen1_sibori4">N</label><br><br>
+										<input type="checkbox" checked id="gen1_sibori5" onchange="gen_sibori_change()" />
+										<label for="gen1_sibori5">火</label>
+										<input type="checkbox" checked id="gen1_sibori6" onchange="gen_sibori_change()" />
+										<label for="gen1_sibori6">水</label>
+										<input type="checkbox" checked id="gen1_sibori7" onchange="gen_sibori_change()" />
+										<label for="gen1_sibori7">風</label>
+										<input type="checkbox" checked id="gen1_sibori8" onchange="gen_sibori_change()" />
+										<label for="gen1_sibori8">雷</label>
+										<input type="checkbox" checked id="gen1_sibori9" onchange="gen_sibori_change()" />
+										<label for="gen1_sibori9">闇</label>
+										<input type="checkbox" checked id="gen1_sibori10" onchange="gen_sibori_change()" />
+										<label for="gen1_sibori10">光</label>
+										<input type="checkbox" checked id="gen1_sibori11" onchange="gen_sibori_change()" />
+										<label for="gen1_sibori11">幻</label>
+									</div>
+							</fieldset> <br>
+  							<fieldset style="border: 1px solid #000000; padding: 10px;"> 
+								<legend>1括設定</legend>
+									<input type="button" id="gen_clear" value="入力をクリア" onclick="gen_clear()" class = "buttons">
+									<input type="button" id="gen_clear" value="レベル最大" onclick="gen_lvmax()" class = "buttons">
+									<input type="button" id="gen_clear" value="ボーナス最大" onclick="gen_plusmax()" class = "buttons">
+							</fieldset>
+							<h2>メイン幻獣</h2>
+    						<table>
+    							<tr>
+    								<th width = "200">
+    									名前
+    								</th>
+    								<th>
+    									レベル
+    								</th>
+    	    							<th>
+    									ボーナス（+）
+    								</th>
+    							</tr>
+    							<tr>
+    								<td>	
+    							   		<select id="gen1_name" onchange="gen_change(1)" class="chosen-select"></select>		
+    								</td>	
+    						        	<td>
+    							   		<input type="number" min="1" max="100" value="1" maxlength="3" id="gen1_lv" class = "inputbox" onchange="gen_info(1)"></input>
+    								</td>
+    								<td>
+    							   		<input type="number" min="0" max="99" value="0" maxlength="2" id="gen1_plus" class = "inputbox" onchange="gen_info(1)"></input>
+    								</td>
+    							</tr>
+    							<tr>
+    								<td colspan = "3">
+    									<div id="gen1_info"></div>
+    								</td>
+    							</tr>
+    						</table>
+    						<h2>フレンド幻獣</h2>
+    						<table>
+    							<tr>
+    								<th width = "200">
+    									名前
+    								</th>
+    								<th colspan ="2">
+    									レベル
+    								</th>
+    							</tr>
+    							<tr>
+    								<td>	
+    							   		<select id="gen2_name" onchange="gen_change(2)" class="chosen-select"></select>		
+    								</td>	
+    						        	<td colspan ="2">
+    							   		<input type="number" min="1" max="100" value="1" maxlength="3" id="gen2_lv" class = "inputbox" onchange="gen_info(2)"></input>
+    								</td>
+    							</tr>
+    							<tr>
+    								<td colspan = "3">
+    									<div id="gen2_info"></div>
+    								</td>
+    							</tr>
+    						</table>
+    						<h2>サブ幻獣</h2>
+    						<table>
+    							<tr>
+    								<th width = "200">
+    									名前
+    								</th>
+    								<th>
+    									レベル
+    								</th>
+    	    							<th>
+    									ボーナス（+）
+    								</th>
+    							</tr>
+    							<tr>
+    								<td>	
+    							   		<select id="gen3_name" onchange="gen_change(3)" class="chosen-select"></select>		
+    								</td>	
+    						        	<td>
+    							   		<input type="number" min="1" max="90" value="1" maxlength="3" id="gen3_lv" class = "inputbox" onchange="gen_info(3)"></input>
+    								</td>
+    								<td>
+    							   		<input type="number" min="0" max="99" value="0" maxlength="2" id="gen3_plus" class = "inputbox" onchange="gen_info(3)"></input>
+    								</td>
+    							</tr>
+    							<tr>
+    								<td colspan = "3">
+    									<div id="gen3_info"></div>
+    								</td>
+    							</tr>
+    							<tr>
+    								<td>	
+    							   		<select id="gen4_name" onchange="gen_change(4)" class="chosen-select"></select>		
+    								</td>	
+    						        	<td>
+    							   		<input type="number" min="1" max="90" value="1" maxlength="3" id="gen4_lv" class = "inputbox" onchange="gen_info(4)"></input>
+    								</td>
+    								<td>
+    							   		<input type="number" min="0" max="99" value="0" maxlength="2" id="gen4_plus" class = "inputbox" onchange="gen_info(4)"></input>
+    								</td>
+    							</tr>
+    							<tr>
+    								<td colspan = "3">
+    									<div id="gen4_info"></div>
+    								</td>
+    							</tr>
+    							<tr>
+    								<td>	
+    							   		<select id="gen5_name" onchange="gen_change(5)" class="chosen-select"></select>		
+    								</td>	
+    						        	<td>
+    							   		<input type="number" min="1" max="90" value="1" maxlength="3" id="gen5_lv" class = "inputbox" onchange="gen_info(5)"></input>
+    								</td>
+    								<td>
+    							   		<input type="number" min="0" max="99" value="0" maxlength="2" id="gen5_plus" class = "inputbox" onchange="gen_info(5)"></input>
+    								</td>
+    							</tr>
+    							<tr>
+    								<td colspan = "3">
+    									<div id="gen5_info"></div>
+    								</td>
+    							</tr>
+    							<tr>
+    								<td>	
+    							   		<select id="gen6_name" onchange="gen_change(6)" class="chosen-select"></select>		
+    								</td>	
+    						        	<td>
+    							   		<input type="number" min="1" max="90" value="1" maxlength="3" id="gen6_lv" class = "inputbox" onchange="gen_info(6)"></input>
+    								</td>
+    								<td>
+    							   		<input type="number" min="0" max="99" value="0" maxlength="2" id="gen6_plus" class = "inputbox" onchange="gen_info(6)"></input>
+    								</td>
+    							</tr>
+    							<tr>
+    								<td colspan = "3">
+    									<div id="gen6_info"></div>
+    								</td>
+    							</tr>
+    							<tr>
+    								<td>	
+    							   		<select id="gen7_name" onchange="gen_change(7)" class="chosen-select"></select>		
+    								</td>	
+    						        	<td>
+    							   		<input type="number" min="1" max="90" value="1" maxlength="3" id="gen7_lv" class = "inputbox" onchange="gen_info(7)"></input>
+    								</td>
+    								<td>
+    							   		<input type="number" min="0" max="99" value="0" maxlength="2" id="gen7_plus" class = "inputbox" onchange="gen_info(7)"></input>
+    								</td>
+    							</tr>
+    							<tr>
+    								<td colspan = "3">
+    									<div id="gen7_info"></div>
+    								</td>
+    							</tr>
+    						</table>
+  					</div>
+  				</div>
+  			</div>
+  			<div id="menuR">
+				<div class="title">
+					<h1>計算結果</h1>
+					    <br>
+						<div class="box" id="result" style="height: 780px;">
+							<br>	
+							<h3>ウェポンスキル　＋　バフ</h3>
+    						<table>
+    							<tr>
+    								<th width = "90"></th><th>火</th><th>水</th><th>風</th><th>雷</th><th>闇</th><th>光</th>
+    							</tr>
+    							<tr>
+    								<th>
+    									アサルト<br>+プライド
+    								</th>
+    								<td><input  value="0" maxlength="3" id="wep_asa1" class = "inputboxsh" readonly = "true"></input></td>
+    							  	<td><input  value="0" maxlength="3" id="wep_asa2" class = "inputboxsh" readonly = "true"></input></td>
+    							  	<td><input  value="0" maxlength="3" id="wep_asa3" class = "inputboxsh" readonly = "true"></input></td>
+    							  	<td><input  value="0" maxlength="3" id="wep_asa4" class = "inputboxsh" readonly = "true"></input></td>
+    							  	<td><input  value="0" maxlength="3" id="wep_asa5" class = "inputboxsh" readonly = "true"></input></td>
+    							  	<td><input  value="0" maxlength="3" id="wep_asa6" class = "inputboxsh" readonly = "true"></input></td>
+    							</tr>
+    							<tr>
+    								<th>
+    									属性攻撃<br>アップ
+    								</th>
+    								<td><input  value="0" maxlength="3" id="wep_zsa1" class = "inputboxsh" readonly = "true"></input></td>
+    							  	<td><input  value="0" maxlength="3" id="wep_zsa2" class = "inputboxsh" readonly = "true"></input></td>
+    							  	<td><input  value="0" maxlength="3" id="wep_zsa3" class = "inputboxsh" readonly = "true"></input></td>
+    							  	<td><input  value="0" maxlength="3" id="wep_zsa4" class = "inputboxsh" readonly = "true"></input></td>
+    							  	<td><input  value="0" maxlength="3" id="wep_zsa5" class = "inputboxsh" readonly = "true"></input></td>
+    							  	<td><input  value="0" maxlength="3" id="wep_zsa6" class = "inputboxsh" readonly = "true"></input></td>
+    							</tr>
+    							<tr>
+    								<th>
+    									ディフェンダー
+    								</th>
+    								<td><input  value="0" maxlength="3" id="wep_dff1" class = "inputboxsh" readonly = "true"></input></td>
+    							  	<td><input  value="0" maxlength="3" id="wep_dff2" class = "inputboxsh" readonly = "true"></input></td>
+    							  	<td><input  value="0" maxlength="3" id="wep_dff3" class = "inputboxsh" readonly = "true"></input></td>
+    							  	<td><input  value="0" maxlength="3" id="wep_dff4" class = "inputboxsh" readonly = "true"></input></td>
+    							  	<td><input  value="0" maxlength="3" id="wep_dff5" class = "inputboxsh" readonly = "true"></input></td>
+    							  	<td><input  value="0" maxlength="3" id="wep_dff6" class = "inputboxsh" readonly = "true"></input></td>
+    							</tr>
+    						    <tr>
+    								<th>
+    									ヴィゴラス
+    								</th>
+    								<td><input  value="0" maxlength="3" id="wep_vig1" class = "inputboxsh" readonly = "true"></input></td>
+    							  	<td><input  value="0" maxlength="3" id="wep_vig2" class = "inputboxsh" readonly = "true"></input></td>
+    							  	<td><input  value="0" maxlength="3" id="wep_vig3" class = "inputboxsh" readonly = "true"></input></td>
+    							  	<td><input  value="0" maxlength="3" id="wep_vig4" class = "inputboxsh" readonly = "true"></input></td>
+    							  	<td><input  value="0" maxlength="3" id="wep_vig5" class = "inputboxsh" readonly = "true"></input></td>
+    							  	<td><input  value="0" maxlength="3" id="wep_vig6" class = "inputboxsh" readonly = "true"></input></td>
+    							</tr>
+    						    <tr>
+    								<th>
+    									エクシード<br>(上限)
+    								</th>
+    								<td><input  value="0" maxlength="3" id="wep_exs1" class = "inputboxsh" readonly = "true"></input></td>
+    							  	<td><input  value="0" maxlength="3" id="wep_exs2" class = "inputboxsh" readonly = "true"></input></td>
+    							  	<td><input  value="0" maxlength="3" id="wep_exs3" class = "inputboxsh" readonly = "true"></input></td>
+    							  	<td><input  value="0" maxlength="3" id="wep_exs4" class = "inputboxsh" readonly = "true"></input></td>
+    							  	<td><input  value="0" maxlength="3" id="wep_exs5" class = "inputboxsh" readonly = "true"></input></td>
+    							  	<td><input  value="0" maxlength="3" id="wep_exs6" class = "inputboxsh" readonly = "true"></input></td>
+    							</tr>
+    							<tr style="display:none">
+    								<th>
+    									エクシード<br>(ダメージ量)
+    								</th>
+    								<td><input  value="0" maxlength="3" id="wep_exd1" class = "inputboxsh" readonly = "true"></input></td>
+    							  	<td><input  value="0" maxlength="3" id="wep_exd2" class = "inputboxsh" readonly = "true"></input></td>
+    							  	<td><input  value="0" maxlength="3" id="wep_exd3" class = "inputboxsh" readonly = "true"></input></td>
+    							  	<td><input  value="0" maxlength="3" id="wep_exd4" class = "inputboxsh" readonly = "true"></input></td>
+    							  	<td><input  value="0" maxlength="3" id="wep_exd5" class = "inputboxsh" readonly = "true"></input></td>
+    							  	<td><input  value="0" maxlength="3" id="wep_exd6" class = "inputboxsh" readonly = "true"></input></td>
+    							</tr>
+    						    <tr>
+    								<th>
+    									エラポレイト<br>(ダメージ量)
+    								</th>
+    								<td><input  value="0" maxlength="3" id="wep_elp1" class = "inputboxsh" readonly = "true"></input></td>
+    							  	<td><input  value="0" maxlength="3" id="wep_elp2" class = "inputboxsh" readonly = "true"></input></td>
+    							  	<td><input  value="0" maxlength="3" id="wep_elp3" class = "inputboxsh" readonly = "true"></input></td>
+    							  	<td><input  value="0" maxlength="3" id="wep_elp4" class = "inputboxsh" readonly = "true"></input></td>
+    							  	<td><input  value="0" maxlength="3" id="wep_elp5" class = "inputboxsh" readonly = "true"></input></td>
+    							  	<td><input  value="0" maxlength="3" id="wep_elp6" class = "inputboxsh" readonly = "true"></input></td>
+    							</tr>
+    						    <tr>
+    								<th>
+    									アセンション<br>(上限)
+    								</th>
+    								<td><input  value="0" maxlength="3" id="wep_ase1" class = "inputboxsh" readonly = "true"></input></td>
+    							  	<td><input  value="0" maxlength="3" id="wep_ase2" class = "inputboxsh" readonly = "true"></input></td>
+    							  	<td><input  value="0" maxlength="3" id="wep_ase3" class = "inputboxsh" readonly = "true"></input></td>
+    							  	<td><input  value="0" maxlength="3" id="wep_ase4" class = "inputboxsh" readonly = "true"></input></td>
+    							  	<td><input  value="0" maxlength="3" id="wep_ase5" class = "inputboxsh" readonly = "true"></input></td>
+    							  	<td><input  value="0" maxlength="3" id="wep_ase6" class = "inputboxsh" readonly = "true"></input></td>
+								</tr>
+    						    <tr>
+    								<th>
+    									テクニカ<br>(上限)
+    								</th>
+    								<td><input  value="0" maxlength="3" id="wep_tks1" class = "inputboxsh" readonly = "true"></input></td>
+    							  	<td><input  value="0" maxlength="3" id="wep_tks2" class = "inputboxsh" readonly = "true"></input></td>
+    							  	<td><input  value="0" maxlength="3" id="wep_tks3" class = "inputboxsh" readonly = "true"></input></td>
+    							  	<td><input  value="0" maxlength="3" id="wep_tks4" class = "inputboxsh" readonly = "true"></input></td>
+    							  	<td><input  value="0" maxlength="3" id="wep_tks5" class = "inputboxsh" readonly = "true"></input></td>
+    							  	<td><input  value="0" maxlength="3" id="wep_tks6" class = "inputboxsh" readonly = "true"></input></td>
+    							</tr>
+    							<tr style="display:none">
+    								<th>
+    									テクニカ<br>(ダメージ量)
+    								</th>
+    								<td><input  value="0" maxlength="3" id="wep_tkd1" class = "inputboxsh" readonly = "true"></input></td>
+    							  	<td><input  value="0" maxlength="3" id="wep_tkd2" class = "inputboxsh" readonly = "true"></input></td>
+    							  	<td><input  value="0" maxlength="3" id="wep_tkd3" class = "inputboxsh" readonly = "true"></input></td>
+    							  	<td><input  value="0" maxlength="3" id="wep_tkd4" class = "inputboxsh" readonly = "true"></input></td>
+    							  	<td><input  value="0" maxlength="3" id="wep_tkd5" class = "inputboxsh" readonly = "true"></input></td>
+    							  	<td><input  value="0" maxlength="3" id="wep_tkd6" class = "inputboxsh" readonly = "true"></input></td>
+								</tr>
+								<tr style="display:none">
+    								<th>
+    									デスペレート
+    								</th>
+    								<td><input  value="0" maxlength="3" id="wep_dp1" class = "inputboxsh" readonly = "true"></input></td>
+    							  	<td><input  value="0" maxlength="3" id="wep_dp2" class = "inputboxsh" readonly = "true"></input></td>
+    							  	<td><input  value="0" maxlength="3" id="wep_dp3" class = "inputboxsh" readonly = "true"></input></td>
+    							  	<td><input  value="0" maxlength="3" id="wep_dp4" class = "inputboxsh" readonly = "true"></input></td>
+    							  	<td><input  value="0" maxlength="3" id="wep_dp5" class = "inputboxsh" readonly = "true"></input></td>
+    							  	<td><input  value="0" maxlength="3" id="wep_dp6" class = "inputboxsh" readonly = "true"></input></td>
+    							</tr>
+    						</table>
+    						<br>
+    						<h3>表示ステータス(英霊)</h3>
+    						<table>
+    							<tr>
+    								<th>
+    									HP
+    								</th>
+    								<td>
+    							  	 	<input type="number" value="0" maxlength="3" id="uni1_hp" class = "inputbox" readonly = "true"></input>
+    								</td>
+    							</tr>
+    							<tr>
+    								<th>
+    									攻撃力
+    								</th>
+    								<td>
+    							  	 	<input type="number" value="0" maxlength="3" id="uni1_at" class = "inputbox" readonly = "true"></input>
+    								</td>
+    							</tr>
+							</table>
+							<br>
+    						<h3>戦闘時予測</h3>
+    						<table>
+    							<tr>
+    								<th>
+    									予測HP
+    								</th>
+    								<td>
+    							  	 	<input type="number" value="0" maxlength="10" id="exp_hp" class = "inputbox" readonly = "true"></input>
+    								</td>
+    							</tr>
+    							<tr>
+    								<th>
+    									予測通常攻撃ダメージ(中央値)
+    								</th>
+    								<td>
+    							  	 	<input type="number" value="0" maxlength="10" id="exp_dam" class = "inputbox" readonly = "true"></input>
+    								</td>
+    							</tr>
+    							<tr>
+    								<th>
+    									予測バーストダメージ(中央値)
+    								</th>
+    								<td>
+    							  	 	<input type="number" value="0" maxlength="10" id="exp_vdam" class = "inputbox" readonly = "true" style="width:6em;"></input>
+    								</td>
+    							</tr>
+    							<tr id ="tr_exp_ase" style="display:none">
+    								<th id ="th_exp_ase">
+    									アセンション(守護天加算済み)
+    								</th>
+    								<td>
+    							  	 	<input type="number" value="0" maxlength="10" id="exp_ase" class = "inputbox" readonly = "true"></input>
+    								</td>
+    							</tr>
+    							 <tr id ="tr_exp_exd" style="display:none">
+    								<th id ="th_exp_exd">
+    									エクシード上限(守護天加算済み)
+    								</th>
+    								<td>
+    							  	 	<input type="number" value="0" maxlength="10" id="exp_exd" class = "inputbox" readonly = "true"></input>
+    								</td>
+    							</tr>
+    							<tr id ="tr_exp_exs" style="display:none">
+    								<th id ="th_exp_exs">
+    									バーストダメージアップ
+    								</th>
+    								<td>
+    							  	 	<input type="number" value="0" maxlength="10" id="exp_exs" class = "inputbox" readonly = "true"></input>
+    								</td>
+    							</tr>
+    							<tr id ="tr_exp_elp" style="display:none">
+    								<th id ="th_exp_elp">
+    									エラポレイト(守護天加算済み)
+    								</th>
+    								<td>
+    							  	 	<input type="number" value="0" maxlength="10" id="exp_elp" class = "inputbox" readonly = "true"></input>
+									</td>
+								</tr>
+								<tr id ="tr_exp_tkn" style="display:none">
+    								<th id ="th_exp_tkn">
+    									テクニカ(守護天加算済み)
+    								</th>
+    								<td>
+    							  	 	<input type="number" value="0" maxlength="10" id="exp_tkn" class = "inputbox" readonly = "true"></input>
+									</td>
+								</tr>
+							</table>
+						</div>
+				    <br>
+				    <div class="box" id="hozon">
+				    <br><h1>データ保存　<input type="button" id="loadall" onclick = "load_all()" value = "一覧で表示" class = "buttons"></input></h1><br>
+				    <h3>自PCに保存(キャッシュ)</h3>
+				    <table>
+    					<tr>
+    						<th width = "120">保存先名</th><th>セーブ</th><th>ロード</th><th>削除</th>
+    					</tr>
+    					<tr>
+    						<td><input type="text" value="" id="savename_1" class = "inputboxlg"></input></td>
+    						<td><input type="button" id="save_1" value="セーブ" onclick="save_click(1)" class = "buttons"></input></td>
+    						<td><input type="button" id="load_1" value="ロード" onclick="load_click(1)" class = "buttons"></input></td>
+    						<td><input type="button" id="delete_1" value="削除" onclick="delete_click(1)" class = "buttons"></input></td>
+    					</tr>
+    					<tr>
+    						<td><input type="text" value="" id="savename_2" class = "inputboxlg"></input></td>
+    						<td><input type="button" id="save_2" value="セーブ" onclick="save_click(2)" class = "buttons"></input></td>
+    						<td><input type="button" id="load_2" value="ロード" onclick="load_click(2)" class = "buttons"></input></td>
+    						<td><input type="button" id="delete_2" value="削除" onclick="delete_click(2)" class = "buttons"></input></td>
+    					</tr>
+    					<tr>
+    						<td><input type="text" value="" id="savename_3" class = "inputboxlg"></input></td>
+    						<td><input type="button" id="save_3" value="セーブ" onclick="save_click(3)" class = "buttons"></input></td>
+    						<td><input type="button" id="load_3" value="ロード" onclick="load_click(3)" class = "buttons"></input></td>
+    						<td><input type="button" id="delete_3" value="削除" onclick="delete_click(3)" class = "buttons"></input></td>
+    					</tr>
+    					<tr>
+    						<td><input type="text" value="" id="savename_4" class = "inputboxlg"></input></td>
+    						<td><input type="button" id="save_4" value="セーブ" onclick="save_click(4)" class = "buttons"></input></td>
+    						<td><input type="button" id="load_4" value="ロード" onclick="load_click(4)" class = "buttons"></input></td>
+    						<td><input type="button" id="delete_4" value="削除" onclick="delete_click(4)" class = "buttons"></input></td>
+    					</tr>
+    					<tr>
+    						<td><input type="text" value="" id="savename_5" class = "inputboxlg"></input></td>
+    						<td><input type="button" id="save_5" value="セーブ" onclick="save_click(5)" class = "buttons"></input></td>
+    						<td><input type="button" id="load_5" value="ロード" onclick="load_click(5)" class = "buttons"></input></td>
+    						<td><input type="button" id="delete_5" value="削除" onclick="delete_click(5)" class = "buttons"></input></td>
+    					</tr>
+    					<tr>
+    						<td><input type="text" value="" id="savename_6" class = "inputboxlg"></input></td>
+    						<td><input type="button" id="save_6" value="セーブ" onclick="save_click(6)" class = "buttons"></input></td>
+    						<td><input type="button" id="load_6" value="ロード" onclick="load_click(6)" class = "buttons"></input></td>
+    						<td><input type="button" id="delete_6" value="削除" onclick="delete_click(6)" class = "buttons"></input></td>
+    					</tr>
+    					<tr>
+    						<td><input type="text" value="" id="savename_7" class = "inputboxlg"></input></td>
+    						<td><input type="button" id="save_7" value="セーブ" onclick="save_click(7)" class = "buttons"></input></td>
+    						<td><input type="button" id="load_7" value="ロード" onclick="load_click(7)" class = "buttons"></input></td>
+    						<td><input type="button" id="delete_7" value="削除" onclick="delete_click(7)" class = "buttons"></input></td>
+    					</tr>
+    					<tr>
+    						<td><input type="text" value="" id="savename_8" class = "inputboxlg"></input></td>
+    						<td><input type="button" id="save_8" value="セーブ" onclick="save_click(8)" class = "buttons"></input></td>
+    						<td><input type="button" id="load_8" value="ロード" onclick="load_click(8)" class = "buttons"></input></td>
+    						<td><input type="button" id="delete_8" value="削除" onclick="delete_click(8)" class = "buttons"></input></td>
+    					</tr>
+    					<tr>
+    						<td><input type="text" value="" id="savename_9" class = "inputboxlg"></input></td>
+    						<td><input type="button" id="save_9" value="セーブ" onclick="save_click(9)" class = "buttons"></input></td>
+    						<td><input type="button" id="load_9" value="ロード" onclick="load_click(9)" class = "buttons"></input></td>
+    						<td><input type="button" id="delete_9" value="削除" onclick="delete_click(9)" class = "buttons"></input></td>
+    					</tr>
+    					<tr>
+    						<td><input type="text" value="" id="savename_10" class = "inputboxlg"></input></td>
+    						<td><input type="button" id="save_10" value="セーブ" onclick="save_click(10)" class = "buttons"></input></td>
+    						<td><input type="button" id="load_10" value="ロード" onclick="load_click(10)" class = "buttons"></input></td>
+    						<td><input type="button" id="delete_10" value="削除" onclick="delete_click(10)" class = "buttons"></input></td>
+    					</tr>
+    				</table>
+                                <br>
+    				<h3>接続用のURL作成(データ保存なし)</h3>
+    				<table>
+    					<tr>
+    					    <td>
+    					    <input type="button" id="url_hakko" value="発行する" onclick="url_hakko()" class = "buttons"></input></td>
+    					</tr>
+    					<tr>    
+    					    <td>接続用URL<input type="text" value="" id="url_result" class = "inputboxlg" width = "100%"></input></td>
+    					</tr>
+    				</table>
+                                <br>
+    				<h3>サーバに保存</h3>
+    				 <table>
+    					<tr>
+    						<td><input type="button" id="save_11" value="セーブ" onclick="save_click(11)" class = "buttons"></input></td>
+    						<td><input type="button" id="load_11" value="ロード" onclick="load_click(11)" class = "buttons"></input></td>
+    					</tr>
+    					<tr>    
+    					    <td colspan="2">接続用URL<input type="text" value="" id="url_result_11" class = "inputboxlg" width = "100%"></input></td>
+    					</tr>
+    				</table>
+    				</div>
+				</div>
+		    </div>
+  		</div>
+	</div>
+	<input type = "text" style="display:none" id = "itiran1"></input>
+	<input type = "text" style="display:none" id = "itiran2"></input>
+	<input type = "text" style="display:none" id = "itiran3"></input>
+	<input type = "text" style="display:none" id = "itiran4"></input>
+	<input type = "text" style="display:none" id = "itiran5"></input>
+	<input type = "text" style="display:none" id = "itiran6"></input>
+	<input type = "text" style="display:none" id = "itiran7"></input>
+	<input type = "text" style="display:none" id = "itiran8"></input>
+	<input type = "text" style="display:none" id = "itiran9"></input>
+	<input type = "text" style="display:none" id = "itiran10"></input>
+</body>
+</html>

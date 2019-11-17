@@ -1,0 +1,257 @@
+html{
+	height:100%;
+}
+
+table {
+	margin: 0px auto 0px auto;
+	width:90%;
+	padding:0px;
+	border-collapse: collapse;
+	border:1px solid #000;
+	border-color:#383838;
+	font-weight:bold;
+	color:#222;
+  	table-layout:fixed;
+  	word-break:break-all;
+  	word-wrap:break-word;
+    	empty-cells: hide;
+}
+th {
+	vertical-align: middle;
+	height: 20px;
+	padding: 0px 0px 0px 5px;
+	text-align: left;
+	font-size: 14px;
+	font-weight:bold;
+	color:#fff;
+	background-color:#999999;
+	cursor:default;
+	border:1px solid #000;
+}
+td {
+	padding: 3px;
+	margin: 0px;
+	height: 28px;
+	border: none;
+	font-size: 13px;
+	line-height: 15px;
+	vertical-align: middle;
+	background-color:#fff;
+	border:1px solid #000;
+}
+fieldset {
+        font-size: 13px;
+}
+.setumei{
+        padding: 0px 5px 10px 10px;
+        text-align: left;
+        font-size: 16px;
+}
+.inputbox{
+	height: 20px;
+        width: 60px;
+}
+.buttons{
+	height: 20px;
+        width: 90px;
+}
+.inputboxsh{
+	height: 20px;
+        width: 40px;
+}
+.inputboxlg{
+	height: 20px;
+        width: 95%;
+}
+select{
+	height: 20px;
+}
+.chkbox {
+	margin:			0 0 5px 5px;
+}
+/* ラベルのスタイル　*/
+.chkbox label {
+	padding-left:		20px;			/* ラベルの位置 */
+	font-size:		15px;
+	line-height:		15px;
+	display:		inline-block;
+	cursor:			pointer;
+	position:		relative;
+}
+
+/* ボックスのスタイル */
+.chkbox label:before {
+	content:		'';
+	width:			15px;			/* ボックスの横幅 */
+	height:			15px;			/* ボックスの縦幅 */
+	display:		inline-block;
+	position:		absolute;
+	left:			0;
+	background-color:	#fff;
+	box-shadow:		inset 1px 2px 3px 0px #000;
+}
+/* 元のチェックボックスを表示しない */
+.chkbox input[type=checkbox] {
+	display:		none;
+}
+/* チェックした時のスタイル */
+.chkbox input[type=checkbox]:checked + label:before {
+	content:		'\2713';		/* チェックの文字 */ 
+	font-size:		13px;			/* チェックのサイズ */
+	color:			#000;			/* チェックの色 */
+	background-color:	#fff;			/* チェックした時の色 */
+}
+
+#page {
+	width:1150px;
+        max-width: 100%;
+	height: auto !important;
+        height:100%;
+	min-height:100%;
+	margin:auto;
+	align:center;
+	background-color:#fffacd;
+	box-shadow: 0px 0px 1px 1px;
+	padding:0px;
+	position:relative;
+        overflow:hidden;
+}
+
+#header {
+	height: 75px;
+	margin: 0px;
+	border-top: 1px solid #FFFFFF;
+	color: #FFFFFF;
+}
+
+#sitename {
+	margin: 30px 5px 0px;
+	font-size: 24px;
+	font-weight: bold;
+	color: #666666;
+}
+
+/* ======================================== #contents 画面中央部 #mainとサイドメニューの外枠 */
+#contents{
+	padding: 10px 0px 20px;
+	margin: 0px;
+}
+
+* { /* 全ての要素の間隔・余白を０へ */
+margin:0;
+padding:0;
+}
+
+/* ========================================  #main ページの本文 */
+#main {
+	width: 45%;
+	margin: 0px 10px 0px 20px;
+        float: left;
+}
+
+h1 {
+	padding: 0px;
+	margin: 0px;
+	color: #0B7A8E;
+        font-size: 24px;
+}
+
+h2 {
+	clear: both;
+	padding: 3px 0px 3px 5px;
+	margin: 1em 0px 1em;
+	font-size: 120%;
+	background-color: #F6F6F6;
+}
+
+h3 {
+	margin: 0px 0px 0.5em 3px;
+	font-size: 100%;
+	color: #336699;
+}
+
+/* ========================================  menuL 右サイドメニュー */
+#menuR {
+	float: right;
+	margin: 0px 0px 20px;
+        width: 50%;
+}
+
+#menuR p{
+	margin-right: 1em;
+	margin-left: 1em;
+}
+
+.title{
+	padding: 0px 0px 0px 10px;
+	margin: 0px 0px 20px;
+}
+
+.box {
+	float: left;
+	height: 750px;
+	width: 90%;
+	margin: 0px 10px 15px 0px;
+	font-size: 92%;
+	background-color: #FFF;
+}
+
+/*タブ切り替え全体のスタイル*/
+.tabs {
+  margin-top: 50px;
+  padding-bottom: 40px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  margin: 0 auto;}
+
+/*タブのスタイル*/
+.tab_item {
+  width: calc(99.9%/3);
+  height: 50px;
+  border-bottom: 3px solid #5ab4bd;
+  background-color: #d9d9d9;
+  line-height: 50px;
+  font-size: 16px;
+  text-align: center;
+  color: #565656;
+  display: block;
+  float: left;
+  text-align: center;
+  font-weight: bold;
+  transition: all 0.2s ease;
+}
+.tab_item:hover {
+  opacity: 0.75;
+}
+
+/*ラジオボタンを全て消す*/
+input[name="tab_item"] {
+  display: none;
+}
+
+/*タブ切り替えの中身のスタイル*/
+.tab_content {
+  display: none;
+  padding: 10px 10px 0;
+  clear: both;
+  /* overflow: hidden;*/
+}
+
+
+/*選択されているタブのコンテンツのみを表示*/
+#kami:checked ~ #kami_content,
+#wep:checked ~ #wep_content,
+#gen:checked ~ #gen_content {
+  display: block;
+}
+
+/*選択されているタブのスタイルを変える*/
+.tabs input:checked + .tab_item {
+  background-color: #5ab4bd;
+  color: #fff;
+}
+
+.nobordertable{
+  border-style:none;
+}
